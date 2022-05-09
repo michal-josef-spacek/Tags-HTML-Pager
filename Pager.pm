@@ -16,15 +16,12 @@ sub new {
 
 	# Create object.
 	my ($object_params_ar, $other_params_ar) = split_params(
-		['css_pager', 'flag_more', 'flag_prev_next', 'flag_paginator',
+		['css_pager', 'flag_prev_next', 'flag_paginator',
 		'num_paginator_pages', 'url_page_cb'], @params);
 	my $self = $class->SUPER::new(@{$other_params_ar});
 
 	# CSS class.
 	$self->{'css_pager'} = 'pager';
-
-	# Flag for more button.
-	$self->{'flag_more'} = 0;
 
 	# Flag for prev/next buttons..
 	$self->{'flag_prev_next'} = 1;
@@ -121,17 +118,6 @@ sub _process {
 				['e', 'span'],
 			),
 
-			['e', 'p'],
-		);
-	}
-
-	# More.
-	if ($self->{'flag_more'}) {
-		$self->{'tags'}->put(
-			['b', 'p'],
-			['a', 'class', $self->_css_class('more')],
-
-			# TODO
 			['e', 'p'],
 		);
 	}
