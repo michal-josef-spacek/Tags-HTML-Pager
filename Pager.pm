@@ -177,7 +177,7 @@ sub _process_css {
 		['e'],
 
 		['s', '.'.$self->_css_class('paginator').' a'],
-		['d', 'color', $self->{'css_colors'}->{'other_color'}],
+		$self->_css_colors_optional('other_color', 'color'),
 		$self->_css_colors_optional('other_background', 'background-color'),
 		['e'],
 
