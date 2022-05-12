@@ -22,9 +22,9 @@ sub new {
 
 	# CSS colors.
 	$self->{'css_colors'} = {
-		'border' => 'black',
 		'actual_background' => 'black',
 		'actual_color' => 'white',
+		'border' => 'black',
 		'other_background' => undef,
 		'other_color' => 'black',
 	},
