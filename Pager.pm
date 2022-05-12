@@ -118,6 +118,7 @@ sub _process {
 		
 		$self->{'tags'}->put(
 			['b', 'p'],
+			['a', 'class', $self->_css_class('prev_next')],
 
 			# Previous page.
 			$prev ? (
