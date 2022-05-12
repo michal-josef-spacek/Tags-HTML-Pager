@@ -105,7 +105,7 @@ sub _process {
 	}
 
 	# Paging.
-	if ($self->{'flag_prev_next'}) {
+	if ($self->{'flag_prev_next'} && $pages_hr->{'pages_num'} > 1) {
 		my ($prev, $next);
 		if ($pages_hr->{'pages_num'} > 1) {
 			if ($pages_hr->{'actual_page'} > 1) {
