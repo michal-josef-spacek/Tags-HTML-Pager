@@ -16,9 +16,18 @@ sub new {
 
 	# Create object.
 	my ($object_params_ar, $other_params_ar) = split_params(
-		['css_pager', 'flag_prev_next', 'flag_paginator',
+		['css_colors', 'css_pager', 'flag_prev_next', 'flag_paginator',
 		'num_paginator_pages', 'url_page_cb'], @params);
 	my $self = $class->SUPER::new(@{$other_params_ar});
+
+	# CSS colors.
+	$self->{'css_colors'} = {
+		'border' => 'black',
+		'actual_background' => 'black',
+		'actual_color' => 'white',
+		'other_background' => undef,
+		'other_color' => 'black',
+	},
 
 	# CSS class.
 	$self->{'css_pager'} = 'pager';
@@ -66,11 +75,31 @@ sub _process {
 
 	# Paginator
 	if ($self->{'flag_paginator'}) {
+		my $buttons = $pages_hr->{'pages_num'} > $self->{'num_paginator_pages'}
+			? $self->{'num_paginator_pages'}
+			: $pages_hr->{'pages_num'};
 		$self->{'tags'}->put(
 			['b', 'p'],
 			['a', 'class', $self->_css_class('paginator')],
-
-			# TODO
+		);
+		foreach my $button_num (1 .. $buttons) {
+			if ($pages_hr->{'actual_page'} eq $button_num) {
+				$self->{'tags'}->put(
+					['b', 'strong'],
+					['a', 'class', $self->_css_class('paginator-selected')],
+					['d', $button_num],
+					['e', 'strong'],
+				);
+			} else {
+				$self->{'tags'}->put(
+					['b', 'a'],
+					['a', 'href', $self->{'url_page_cb'}->($button_num)],
+					['d', $button_num],
+					['e', 'a'],
+				);
+			}
+		}
+		$self->{'tags'}->put(
 			['e', 'p'],
 		);
 	}
@@ -124,6 +153,40 @@ sub _process {
 
 	$self->{'tags'}->put(
 		['e', 'div'],
+	);
+
+	return;
+}
+
+sub _process_css {
+	my $self = shift;
+
+	$self->{'css'}->put(
+		['s', '.'.$self->{'css_pager'}.' a'],
+		['d', 'text-decoration', 'none'],
+		['e'],
+
+		['s', '.'.$self->_css_class('paginator').' a'],
+		['s', '.'.$self->_css_class('paginator').' strong'],
+		['s', '.'.$self->_css_class('next')],
+		['s', '.'.$self->_css_class('next-disabled')],
+		['s', '.'.$self->_css_class('prev')],
+		['s', '.'.$self->_css_class('prev-disabled')],
+		['d', 'padding', '7px 15px'],
+		['d', 'border', '1px solid '.$self->{'css_colors'}->{'border'}],
+		['e'],
+
+		['s', '.'.$self->_css_class('paginator').' a'],
+		['d', 'color', $self->{'css_colors'}->{'other_color'}],
+		defined $self->{'css_colors'}->{'other_background'}
+			? (['d', 'background-color', $self->{'css_colors'}->{'other_background'}])
+			: (),
+		['e'],
+
+		['s', '.'.$self->_css_class('paginator-selected')],
+		['d', 'background-color', $self->{'css_colors'}->{'actual_background'}],
+		['d', 'color', $self->{'css_colors'}->{'actual_color'}],
+		['e'],
 	);
 
 	return;
