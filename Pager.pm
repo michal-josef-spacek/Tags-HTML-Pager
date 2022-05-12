@@ -25,6 +25,8 @@ sub new {
 		'actual_background' => 'black',
 		'actual_color' => 'white',
 		'border' => 'black',
+		'hover_background' => 'black',
+		'hover_color' => 'white',
 		'other_background' => undef,
 		'other_color' => 'black',
 	},
@@ -175,6 +177,12 @@ sub _process_css {
 		['s', '.'.$self->_css_class('prev-disabled')],
 		['d', 'padding', '7px 15px'],
 		['d', 'border', '1px solid '.$self->{'css_colors'}->{'border'}],
+		['e'],
+
+		['s', '.'.$self->_css_class('paginator').' a:hover'],
+		['s', '.'.$self->_css_class('prev_next').' a:hover'],
+		$self->_css_colors_optional('hover_color', 'color'),
+		$self->_css_colors_optional('hover_background', 'background-color'),
 		['e'],
 
 		['s', '.'.$self->_css_class('paginator').' a'],
