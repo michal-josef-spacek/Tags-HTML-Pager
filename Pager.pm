@@ -178,9 +178,7 @@ sub _process_css {
 
 		['s', '.'.$self->_css_class('paginator').' a'],
 		['d', 'color', $self->{'css_colors'}->{'other_color'}],
-		defined $self->{'css_colors'}->{'other_background'}
-			? (['d', 'background-color', $self->{'css_colors'}->{'other_background'}])
-			: (),
+		$self->_css_colors_optional('other_background', 'background-color'),
 		['e'],
 
 		['s', '.'.$self->_css_class('paginator-selected')],
@@ -202,6 +200,14 @@ sub _css_class {
 	$class .= $suffix;
 
 	return $class;
+}
+
+sub _css_colors_optional {
+	my ($self, $css_color, $css_key) = @_;
+
+	return defined $self->{'css_colors'}->{$css_color}
+		? (['d', $css_key, $self->{'css_colors'}->{$css_color}])
+		: ();
 }
 
 1;
