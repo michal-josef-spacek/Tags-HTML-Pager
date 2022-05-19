@@ -169,6 +169,19 @@ sub _process_css {
 		['d', 'text-decoration', 'none'],
 		['e'],
 
+		['s', '.'.$self->_css_class('paginator')],
+		['d', 'display', 'flex'],
+		['d', 'flex-wrap', 'wrap'],
+		['d', 'justify-content', 'center'],
+		['d', 'padding-left', '130px'],
+		['d', 'padding-right', '130px'],
+		['d', 'float', 'both'],
+		['e'],
+
+		['s', '.'.$self->_css_class('prev_next')],
+		['d', 'display', 'flex'],
+		['e'],
+
 		['s', '.'.$self->_css_class('paginator').' a'],
 		['s', '.'.$self->_css_class('paginator').' strong'],
 		['s', '.'.$self->_css_class('next')],
@@ -177,6 +190,14 @@ sub _process_css {
 		['s', '.'.$self->_css_class('prev-disabled')],
 		['d', 'padding', '7px 15px'],
 		['d', 'border', '1px solid '.$self->{'css_colors'}->{'border'}],
+		['e'],
+
+
+		['s', '.'.$self->_css_class('prev')],
+		['s', '.'.$self->_css_class('next')],
+		['d', 'display', 'inline-flex'],
+		['d', 'align-items', 'center'],
+		['d', 'justify-content', 'center'],
 		['e'],
 
 		['s', '.'.$self->_css_class('paginator').' a:hover'],
