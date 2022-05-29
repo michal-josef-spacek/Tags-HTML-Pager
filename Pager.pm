@@ -69,6 +69,12 @@ sub _process {
 	if (! exists $pages_hr->{'actual_page'}) {
 		err "Missing 'actual_page' parameter in pages data structure.";
 	}
+	if ($pages_hr->{'actual_page'} > $pages_hr->{'pages_num'}) {
+		err "Parameter 'actual_page' is greater than parameter 'pages_num'.",
+			'actual_page', $pages_hr->{'actual_page'},
+			'pages_num', $pages_hr->{'pages_num'},
+			;
+	}
 
 	$self->{'tags'}->put(
 		['b', 'div'],
