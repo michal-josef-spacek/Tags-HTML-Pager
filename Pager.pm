@@ -37,8 +37,8 @@ sub new {
 	# CSS class.
 	$self->{'css_pager'} = 'pager';
 
-	# Flag for prev/next buttons..
-	$self->{'flag_prev_next'} = 1;
+	# Flag for prev/next buttons.
+	$self->{'flag_prev_next'} = 0;
 
 	# Flag for paginator.
 	$self->{'flag_paginator'} = 1;
