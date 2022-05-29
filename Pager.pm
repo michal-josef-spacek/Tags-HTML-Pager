@@ -17,7 +17,7 @@ sub new {
 	# Create object.
 	my ($object_params_ar, $other_params_ar) = split_params(
 		['css_colors', 'css_pager', 'flag_prev_next', 'flag_paginator',
-		'num_paginator_pages', 'url_page_cb'], @params);
+		'url_page_cb'], @params);
 	my $self = $class->SUPER::new(@{$other_params_ar});
 
 	# CSS colors.
@@ -39,9 +39,6 @@ sub new {
 
 	# Flag for paginator.
 	$self->{'flag_paginator'} = 1;
-
-	# Number of paginator buttons.
-	$self->{'num_paginator_pages'} = 5;
 
 	# URL of page.
 	$self->{'url_page_cb'} = undef;
@@ -77,14 +74,39 @@ sub _process {
 
 	# Paginator
 	if ($self->{'flag_paginator'}) {
-		my $buttons = $pages_hr->{'pages_num'} > $self->{'num_paginator_pages'}
-			? $self->{'num_paginator_pages'}
-			: $pages_hr->{'pages_num'};
 		$self->{'tags'}->put(
 			['b', 'p'],
 			['a', 'class', $self->_css_class('paginator')],
 		);
-		foreach my $button_num (1 .. $buttons) {
+		my $buttons_from = 1;
+		my $buttons_to = $pages_hr->{'pages_num'};
+		if ($pages_hr->{'actual_page'} > 4 && $pages_hr->{'pages_num'} > 7) {
+			$self->{'tags'}->put(
+				['b', 'a'],
+				['a', 'href', $self->{'url_page_cb'}->(1)],
+				['d', 1],
+				['e', 'a'],
+
+				['b', 'span'],
+				['d', decode_utf8('…')],
+				['e', 'span'],
+			);
+			if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3) {
+				$buttons_from = $pages_hr->{'actual_page'} - 1;
+			} else {
+				$buttons_from = $pages_hr->{'pages_num'} - 4;
+			}
+		}
+		if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3
+			&& $pages_hr->{'pages_num'} > 7) {
+
+			if ($pages_hr->{'actual_page'} > 4) {
+				$buttons_to = $pages_hr->{'actual_page'} + 1;
+			} else {
+				$buttons_to = 5;
+			}
+		}
+		foreach my $button_num ($buttons_from .. $buttons_to) {
 			if ($pages_hr->{'actual_page'} eq $button_num) {
 				$self->{'tags'}->put(
 					['b', 'strong'],
@@ -100,6 +122,18 @@ sub _process {
 					['e', 'a'],
 				);
 			}
+		}
+		if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3 && $pages_hr->{'pages_num'} > 7) {
+			$self->{'tags'}->put(
+				['b', 'span'],
+				['d', decode_utf8('…')],
+				['e', 'span'],
+
+				['b', 'a'],
+				['a', 'href', $self->{'url_page_cb'}->($pages_hr->{'pages_num'})],
+				['d', $pages_hr->{'pages_num'}],
+				['e', 'a'],
+			);
 		}
 		$self->{'tags'}->put(
 			['e', 'p'],
@@ -184,6 +218,7 @@ sub _process_css {
 
 		['s', '.'.$self->_css_class('paginator').' a'],
 		['s', '.'.$self->_css_class('paginator').' strong'],
+		['s', '.'.$self->_css_class('paginator').' span'],
 		['s', '.'.$self->_css_class('next')],
 		['s', '.'.$self->_css_class('next-disabled')],
 		['s', '.'.$self->_css_class('prev')],
