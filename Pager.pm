@@ -6,7 +6,10 @@ use warnings;
 
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
+use Readonly;
 use Unicode::UTF8 qw(decode_utf8);
+
+Readonly::Scalar our $NUMBER_OF_BOXES => 7;
 
 our $VERSION = 0.01;
 
@@ -80,7 +83,7 @@ sub _process {
 		);
 		my $buttons_from = 1;
 		my $buttons_to = $pages_hr->{'pages_num'};
-		if ($pages_hr->{'actual_page'} > 4 && $pages_hr->{'pages_num'} > 7) {
+		if ($pages_hr->{'actual_page'} > 4 && $pages_hr->{'pages_num'} > $NUMBER_OF_BOXES) {
 			$self->{'tags'}->put(
 				['b', 'a'],
 				['a', 'href', $self->{'url_page_cb'}->(1)],
@@ -98,7 +101,7 @@ sub _process {
 			}
 		}
 		if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3
-			&& $pages_hr->{'pages_num'} > 7) {
+			&& $pages_hr->{'pages_num'} > $NUMBER_OF_BOXES) {
 
 			if ($pages_hr->{'actual_page'} > 4) {
 				$buttons_to = $pages_hr->{'actual_page'} + 1;
@@ -123,7 +126,7 @@ sub _process {
 				);
 			}
 		}
-		if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3 && $pages_hr->{'pages_num'} > 7) {
+		if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3 && $pages_hr->{'pages_num'} > $NUMBER_OF_BOXES) {
 			$self->{'tags'}->put(
 				['b', 'span'],
 				['d', decode_utf8('…')],
