@@ -1,6 +1,5 @@
 TODO
 ====
-2. Tests.
 3. Set nice default colors.
 4. Finish CSS for paginator vs prev_next
 5.
@@ -9,3 +8,6 @@ Applied
 =======
 1. First version.
 OK [20220512] skim
+
+2. Tests.
+OK [20220529] skim
