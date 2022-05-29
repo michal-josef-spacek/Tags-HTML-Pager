@@ -190,6 +190,7 @@ sub _process_css {
 		['s', '.'.$self->_css_class('prev-disabled')],
 		['d', 'padding', '7px 15px'],
 		['d', 'border', '1px solid '.$self->{'css_colors'}->{'border'}],
+		['d', 'margin-left', '-1px'],
 		['e'],
 
 
