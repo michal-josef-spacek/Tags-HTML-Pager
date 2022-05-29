@@ -83,7 +83,9 @@ sub _process {
 		);
 		my $buttons_from = 1;
 		my $buttons_to = $pages_hr->{'pages_num'};
-		if ($pages_hr->{'actual_page'} > 4 && $pages_hr->{'pages_num'} > $NUMBER_OF_BOXES) {
+		if ($pages_hr->{'actual_page'} > 4
+			&& $pages_hr->{'pages_num'} > $NUMBER_OF_BOXES) {
+
 			$self->{'tags'}->put(
 				['b', 'a'],
 				['a', 'href', $self->{'url_page_cb'}->(1)],
@@ -126,7 +128,9 @@ sub _process {
 				);
 			}
 		}
-		if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3 && $pages_hr->{'pages_num'} > $NUMBER_OF_BOXES) {
+		if ($pages_hr->{'actual_page'} < $pages_hr->{'pages_num'} - 3
+			&& $pages_hr->{'pages_num'} > $NUMBER_OF_BOXES) {
+
 			$self->{'tags'}->put(
 				['b', 'span'],
 				['d', decode_utf8('…')],
