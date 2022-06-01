@@ -294,3 +294,225 @@ sub _css_colors_optional {
 }
 
 1;
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+Tags::HTML::Pager - Tags helper for pager.
+
+=head1 SYNOPSIS
+
+ use Tags::HTML::Pager;
+
+ my $obj = Tags::HTML::Pager->new(%params);
+ $obj->process($pager_hr);
+ $obj->process_css;
+
+=head1 METHODS
+
+=head2 C<new>
+
+ my $obj = Tags::HTML::Pager->new(%params);
+
+Constructor.
+
+=over 8
+
+=item * C<css_colors>
+
+Colors for CSS style.
+
+Default value is:
+ {
+         'actual_background' => 'black',
+         'actual_color' => 'white',
+         'border' => 'black',
+         'hover_background' => 'black',
+         'hover_color' => 'white',
+         'other_background' => undef,
+         'other_color' => 'black',
+ }
+
+=item * C<css_pager>
+
+Main CSS class of this block.
+
+Default value is 'pager'.
+
+=item * C<flag_prev_next>
+
+Flag, which mean print of prev_next buttons.
+
+Default value is 0.
+
+=item * C<flag_paginator>
+
+Flag, which mean print of paginator buttons.
+
+Default value is 1.
+
+=item * C<url_page_cb>
+
+Callback for creating of url for view page.
+
+Input argument is page variable with number of page.
+
+It's required parameter.
+
+=item * C<tags>
+
+'Tags::Output' object.
+
+Default value is undef.
+
+=back
+
+=head2 C<process>
+
+ $obj->process($pager_hr);
+
+Process Tags structure for output with pager.
+
+Returns undef.
+
+=head2 C<process_css>
+
+ $obj->process_css;
+
+Process CSS::Struct structure for output.
+
+Returns undef.
+
+=head1 ERRORS
+
+ new():
+         From Class::Utils::set_params():
+                 Unknown parameter '%s'.
+         From Tags::HTML::new():
+                 Parameter 'tags' must be a 'Tags::Output::*' class.
+
+ process():
+         Missing 'pages_num' parameter in pages data structure.
+         Missing 'actual_page' parameter in pages data structure.
+         Pages data structure is missing.
+         Parameter 'actual_page' is greater than parameter 'pages_num'.
+                 actual_page: %s
+                 pages_num: %s
+         From Tags::HTML::process():
+                 Parameter 'tags' isn't defined.
+
+=head1 EXAMPLE
+
+ use strict;
+ use warnings;
+
+ use CSS::Struct::Output::Indent;
+ use Tags::HTML::Pager;
+ use Tags::Output::Indent;
+
+ # Object.
+ my $css = CSS::Struct::Output::Indent->new;
+ my $tags = Tags::Output::Indent->new;
+ my $obj = Tags::HTML::Pager->new(
+         'css' => $css,
+         'tags' => $tags,
+         'url_page_cb' => sub {
+                 my $page = shift;
+                 return 'https://example.com/?page='.$page;
+         }
+ );
+
+ # Process pager.
+ $obj->process({
+         'actual_page' => 1,
+         'pages_num' => 1,
+ });
+ $obj->process_css;
+
+ # Print out.
+ print $tags->flush;
+ print "\n\n";
+ print $css->flush;
+
+ # Output:
+ # <div class="pager">
+ #   <p class="pager-paginator">
+ #     <strong class="pager-paginator-selected">
+ #      1
+ #     </strong>
+ #   </p>
+ # </div>
+ #
+ # .pager a {
+ #         text-decoration: none;
+ # }
+ # .pager-paginator {
+ #         display: flex;
+ #         flex-wrap: wrap;
+ #         justify-content: center;
+ #         padding-left: 130px;
+ #         padding-right: 130px;
+ #         float: both;
+ # }
+ # .pager-prev_next {
+ #         display: flex;
+ # }
+ # .pager-paginator a, .pager-paginator strong, .pager-paginator span, .pager-next,
+ # .pager-next-disabled, .pager-prev, .pager-prev-disabled {
+ #         display: flex;
+ #         height: 55px;
+ #         width: 55px;
+ #         justify-content: center;
+ #         align-items: center;
+ #         border: 1px solid black;
+ #         margin-left: -1px;
+ # }
+ # .pager-prev, .pager-next {
+ #         display: inline-flex;
+ #         align-items: center;
+ #         justify-content: center;
+ # }
+ # .pager-paginator a:hover, .pager-prev_next a:hover {
+ #         color: white;
+ #         background-color: black;
+ # }
+ # .pager-paginator a {
+ #         color: black;
+ # }
+ # .pager-paginator-selected {
+ #         background-color: black;
+ #         color: white;
+ # }
+
+=head1 DEPENDENCIES
+
+L<Class::Utils>,
+L<Error::Pure>,
+L<Readonly>,
+L<Tags::HTML>,
+L<Unicode::UTF8>.
+
+=head1 REPOSITORY
+
+L<https://github.com/michal-josef-spacek/Tags-HTML-Pager>
+
+=head1 AUTHOR
+
+Michal Josef Špaček L<mailto:skim@cpan.org>
+
+L<http://skim.cz>
+
+=head1 LICENSE AND COPYRIGHT
+
+© Michal Josef Špaček 2022
+
+BSD 2-Clause License
+
+=head1 VERSION
+
+0.01
+
+=cut
