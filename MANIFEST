@@ -21,5 +21,6 @@ t/Tags-HTML-Pager/01-use.t
 t/Tags-HTML-Pager/02-version.t
 t/Tags-HTML-Pager/03-new.t
 t/Tags-HTML-Pager/04-process.t
+t/Tags-HTML-Pager/05-process_css.t
 xt/Tags-HTML-Pager/01-pod_coverage.t
 xt/Tags-HTML-Pager/02-pod.t

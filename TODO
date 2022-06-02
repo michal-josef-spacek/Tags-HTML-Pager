@@ -2,7 +2,6 @@ TODO
 ====
 3. Set nice default colors.
 4. Finish CSS for paginator vs prev_next
-6. Add tests for process_css().
 7. Add another tests for process().
 8. We have more different document types like .webm
 9. Functional on mobile
@@ -18,3 +17,6 @@ OK [20220529] skim
 
 5. Add doc
 OK [20220601] skim
+
+6. Add tests for process_css().
+OK [20220602] skim
