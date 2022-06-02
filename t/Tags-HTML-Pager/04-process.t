@@ -5,8 +5,9 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Pager;
 use Tags::Output::Structure;
-use Test::More 'tests' => 7;
+use Test::More 'tests' => 8;
 use Test::NoWarnings;
+use Unicode::UTF8 qw(decode_utf8);
 
 # Test.
 my $tags = Tags::Output::Structure->new;
@@ -59,6 +60,44 @@ is_deeply(
 	$ret_ar,
 	[],
 	'Pager HTML code (1 page, paginator off, prev_next on).',
+);
+
+# Test.
+$tags = Tags::Output::Structure->new;
+$obj = Tags::HTML::Pager->new(
+	'flag_prev_next' => 1,
+	'flag_paginator' => 0,
+	'tags' => $tags,
+	'url_page_cb' => sub {
+		my $page = shift;
+		return 'http://example.com/?page='.$page;
+	},
+);
+$obj->process({
+	'actual_page' => 1,
+	'pages_num' => 2,
+});
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'div'],
+		['a', 'class', 'pager'],
+		['b', 'p'],
+		['a', 'class', 'pager-prev_next'],
+		['b', 'span'],
+		['a', 'class', 'pager-prev-disabled'],
+		['d', decode_utf8('←')],
+		['e', 'span'],
+		['b', 'a'],
+		['a', 'class', 'pager-next'],
+		['a', 'href', 'http://example.com/?page=2'],
+		['d', decode_utf8('→')],
+		['e', 'a'],
+		['e', 'p'],
+		['e', 'div'],
+	],
+	'Pager HTML code (2 pages, paginator off, prev_next on).',
 );
 
 # Test.
