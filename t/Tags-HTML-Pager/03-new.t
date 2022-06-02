@@ -5,7 +5,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Pager;
 use Tags::Output::Raw;
-use Test::More 'tests' => 6;
+use Test::More 'tests' => 7;
 use Test::NoWarnings;
 
 # Test.
@@ -67,4 +67,19 @@ is(
 	"Parameter 'tags' must be a 'Tags::Output::*' class.\n",
 	"Bad 'Tags::Output' instance.",
 );
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Pager->new(
+		'flag_prev_next' => 0,
+		'flag_paginator' => 0,
+		'url_page_cb' => sub {
+			my $page = shift;
+			return 'http://example.com/?page='.$page;
+		},
+	);
+};
+is($EVAL_ERROR, "Both paginator styles disabled.\n",
+	'Both paginator styles disabled.');
 clean();

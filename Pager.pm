@@ -53,6 +53,10 @@ sub new {
 		err "Missing 'url_page_cb' parameter.";
 	}
 
+	if (! $self->{'flag_paginator'} && ! $self->{'flag_prev_next'}) {
+		err 'Both paginator styles disabled.';
+	}
+
 	# Object.
 	return $self;
 }
@@ -389,6 +393,7 @@ Returns undef.
 =head1 ERRORS
 
  new():
+         Both paginator styles disabled.
          Missing 'url_page_cb' parameter.
          From Class::Utils::set_params():
                  Unknown parameter '%s'.
