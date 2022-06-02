@@ -5,7 +5,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Pager;
 use Tags::Output::Structure;
-use Test::More 'tests' => 6;
+use Test::More 'tests' => 7;
 use Test::NoWarnings;
 
 # Test.
@@ -37,6 +37,28 @@ is_deeply(
 		['e', 'div'],
 	],
 	'Pager HTML code (1 page).',
+);
+
+# Test.
+$tags = Tags::Output::Structure->new;
+$obj = Tags::HTML::Pager->new(
+	'flag_prev_next' => 1,
+	'flag_paginator' => 0,
+	'tags' => $tags,
+	'url_page_cb' => sub {
+		my $page = shift;
+		return 'http://example.com/?page='.$page;
+	},
+);
+$obj->process({
+	'actual_page' => 1,
+	'pages_num' => 1,
+});
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[],
+	'Pager HTML code (1 page, paginator off, prev_next on).',
 );
 
 # Test.

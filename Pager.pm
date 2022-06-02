@@ -80,6 +80,13 @@ sub _process {
 			;
 	}
 
+	# No code.
+	if (! $self->{'flag_paginator'}
+		&& $self->{'flag_prev_next'} && $pages_hr->{'pages_num'} == 1) {
+
+		return;
+	}
+
 	$self->{'tags'}->put(
 		['b', 'div'],
 		['a', 'class', $self->{'css_pager'}],
