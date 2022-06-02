@@ -3,7 +3,6 @@ TODO
 3. Set nice default colors.
 4. Finish CSS for paginator vs prev_next
 7. Add another tests for process().
-8. We have more different document types like .webm
 9. Functional on mobile
 10. Rewrite process_css() to accept flag_* flags.
 11. process() values like actual_page = -1.
@@ -22,3 +21,7 @@ OK [20220601] skim
 
 6. Add tests for process_css().
 OK [20220602] skim
+
+8. We have more different document types like .webm
+Issue for another module :-D
+NONE [20220602] skim
