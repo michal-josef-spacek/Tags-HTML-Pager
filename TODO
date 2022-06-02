@@ -5,7 +5,8 @@ TODO
 7. Add another tests for process().
 8. We have more different document types like .webm
 9. Functional on mobile
-10.
+10. Rewrite process_css() to accept flag_* flags.
+11.
 
 Applied
 =======
