@@ -389,6 +389,7 @@ Returns undef.
 =head1 ERRORS
 
  new():
+         Missing 'url_page_cb' parameter.
          From Class::Utils::set_params():
                  Unknown parameter '%s'.
          From Tags::HTML::new():
