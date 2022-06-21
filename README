@@ -14,6 +14,12 @@ METHODS
 
     Constructor.
 
+    *       "css"
+
+            'CSS::Struct::Output' object for process_css processing.
+
+            Default value is undef.
+
     *       "css_colors"
 
             Colors for CSS style.

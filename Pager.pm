@@ -332,6 +332,12 @@ Constructor.
 
 =over 8
 
+=item * C<css>
+
+'CSS::Struct::Output' object for L<process_css> processing.
+
+Default value is undef.
+
 =item * C<css_colors>
 
 Colors for CSS style.
