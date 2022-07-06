@@ -306,6 +306,8 @@ sub _css_colors_optional {
 
 1;
 
+__END__
+
 =pod
 
 =encoding utf8
