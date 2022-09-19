@@ -17,6 +17,7 @@ MANIFEST			This list of files
 META.yml
 Pager.pm
 README
+SIGNATURE
 t/Tags-HTML-Pager/01-use.t
 t/Tags-HTML-Pager/02-version.t
 t/Tags-HTML-Pager/03-new.t
