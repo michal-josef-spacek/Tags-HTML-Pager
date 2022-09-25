@@ -9,8 +9,10 @@ build_requires:
   ExtUtils::MakeMaker: 6.36
   File::Object: 0.03
   Tags::Output::Raw: 0
+  Tags::Output::Structure: 0
   Test::More: 0
   Test::NoWarnings: 0
+  Unicode::UTF8: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.36
 distribution_type: module
