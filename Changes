@@ -1,4 +1,5 @@
 0.03
+ - Fix runtime dependencies.
  - Regen README file.
 
 0.02 2022-09-26T10:11:47+02:00

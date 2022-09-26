@@ -19,6 +19,8 @@ readme_from 'Pager.pm';
 recursive_author_tests('xt');
 requires 'Class::Utils' => 0.02;
 requires 'Error::Pure' => 0.07;
+requires 'Readonly' => 0;
+requires 'Tags::HTML' => 0;
 requires 'Unicode::UTF8' => 0;
 requires 'perl' => '5.8.0';
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Tags-HTML-Pager/issues';
