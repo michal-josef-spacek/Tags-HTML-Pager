@@ -1,4 +1,5 @@
 0.03
+ - Regen README file.
 
 0.02 2022-09-26T10:11:47+02:00
  - Change 'css_pager' parameter to required.
