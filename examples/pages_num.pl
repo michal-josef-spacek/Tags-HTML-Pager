@@ -7,17 +7,17 @@ use Tags::HTML::Pager::Utils qw(pages_num);
 
 # Input informations.
 my $items = 123;
-my $images_on_page = 20;
+my $items_on_page = 20;
 
 # Compute.
-my $pages = pages_num($items, $images_on_page);
+my $pages = pages_num($items, $items_on_page);
 
 # Print out.
-print "Images on page: $images_on_page\n";
 print "Items count: $items\n";
+print "Items on page: $items_on_page\n";
 print "Number of pages: $pages\n";
 
 # Output:
-# Images on page: 20
 # Items count: 123
+# Items on page: 20
 # Number of pages: 7 

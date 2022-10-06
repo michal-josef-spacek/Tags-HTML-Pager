@@ -60,11 +60,11 @@ sub compute_index_values {
 }
 
 sub pages_num {
-	my ($items, $images_on_page) = @_;
+	my ($items, $items_on_page) = @_;
 
 	my $pages = 0;
-	if (defined $items && defined $images_on_page) {
-		$pages = ceil($items / $images_on_page);
+	if (defined $items && defined $items_on_page) {
+		$pages = ceil($items / $items_on_page);
 	}
 
 	return $pages;
@@ -88,7 +88,7 @@ Tags::HTML::Pager::Utils - Pager utilities.
 
  my $actual_page = adjust_actual_page($input_actual_page, $pages);
  my ($begin_index, $end_index) = compute_index_values($items, $actual_page, $items_on_page);
- my $pages = pages_num($items, $images_on_page);
+ my $pages = pages_num($items, $items_on_page);
 
 =head1 SUBROUTINES
 
@@ -121,9 +121,9 @@ Returns array with begin and end index.
 
 =head2 C<pages_num>
 
- my $pages = pages_num($items, $images_on_page);
+ my $pages = pages_num($items, $items_on_page);
 
-Compute number of pages from C<$items> and C<$images_on_page>.
+Compute number of pages from C<$items> and C<$items_on_page>.
 If input arguments are undefined, returns 0.
 
 Returns number.
@@ -202,19 +202,19 @@ Returns number.
 
  # Input informations.
  my $items = 123;
- my $images_on_page = 20;
+ my $items_on_page = 20;
 
  # Compute.
- my $pages = pages_num($items, $images_on_page);
+ my $pages = pages_num($items, $items_on_page);
 
  # Print out.
- print "Images on page: $images_on_page\n";
  print "Items count: $items\n";
+ print "Items on page: $items_on_page\n";
  print "Number of pages: $pages\n";
 
  # Output:
- # Images on page: 20
  # Items count: 123
+ # Items on page: 20
  # Number of pages: 7 
 
 =head1 DEPENDENCIES
