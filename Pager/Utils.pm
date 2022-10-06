@@ -11,7 +11,7 @@ use Readonly;
 Readonly::Array our @EXPORT_OK => qw(adjust_actual_page compute_index_values
 	pages_num);
 
-our $VERSION = 0.04;
+our $VERSION = 0.05;
 
 sub adjust_actual_page {
 	my ($input_actual_page, $pages) = @_;
@@ -242,6 +242,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.04
+0.05
 
 =cut
