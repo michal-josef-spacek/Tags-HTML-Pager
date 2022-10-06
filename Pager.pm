@@ -428,6 +428,8 @@ Returns undef.
 
 =head1 EXAMPLE
 
+=for comment filename=print_pager_html_and_css.pl
+
  use strict;
  use warnings;
 

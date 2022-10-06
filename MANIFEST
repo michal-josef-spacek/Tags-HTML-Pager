@@ -1,8 +1,8 @@
 Changes
 examples/adjust_actual_page.pl
 examples/compute_index_values.pl
-examples/ex1.pl
 examples/pages_num.pl
+examples/print_pager_html_and_css.pl
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm
