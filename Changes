@@ -1,4 +1,5 @@
 0.04
+ - Add utilities for pager.
 
 0.03 2022-09-26T13:12:12+02:00
  - Fix runtime dependencies.
