@@ -65,6 +65,20 @@ sub new {
 	return $self;
 }
 
+sub _css_class {
+	my ($self, $suffix) = @_;
+
+	return $self->{'css_pager'}.'-'.$suffix;
+}
+
+sub _css_colors_optional {
+	my ($self, $css_color, $css_key) = @_;
+
+	return defined $self->{'css_colors'}->{$css_color}
+		? (['d', $css_key, $self->{'css_colors'}->{$css_color}])
+		: ();
+}
+
 sub _process {
 	my ($self, $pages_hr) = @_;
 
@@ -286,20 +300,6 @@ sub _process_css {
 	);
 
 	return;
-}
-
-sub _css_class {
-	my ($self, $suffix) = @_;
-
-	return $self->{'css_pager'}.'-'.$suffix;
-}
-
-sub _css_colors_optional {
-	my ($self, $css_color, $css_key) = @_;
-
-	return defined $self->{'css_colors'}->{$css_color}
-		? (['d', $css_key, $self->{'css_colors'}->{$css_color}])
-		: ();
 }
 
 1;
