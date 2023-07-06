@@ -53,7 +53,15 @@ METHODS
 
             Callback for creating of url for view page.
 
-            Input argument is page variable with number of page.
+            Input arguments are:
+
+            *   $page_number
+
+                Page variable with number of page.
+
+            *   $pages_hr
+
+                Reference to array which is going to "process".
 
             It's required parameter.
 
