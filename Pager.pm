@@ -319,7 +319,7 @@ Tags::HTML::Pager - Tags helper for pager.
  use Tags::HTML::Pager;
 
  my $obj = Tags::HTML::Pager->new(%params);
- $obj->process($pager_hr);
+ $obj->process($pages_hr);
  $obj->process_css;
 
 =head1 METHODS
@@ -391,7 +391,7 @@ Default value is undef.
 
 =head2 C<process>
 
- $obj->process($pager_hr);
+ $obj->process($pages_hr);
 
 Process Tags structure for output with pager.
 
